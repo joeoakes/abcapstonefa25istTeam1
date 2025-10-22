@@ -5,6 +5,6 @@ Team Members: Alex Hammond, Ali Almalky, Madisyn Brandt, Giovanni DiBacco
 
 ## Repository Layout
 
-## File Explanations
+### File Explanations
 
 ## Setup Guide
