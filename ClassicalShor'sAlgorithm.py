@@ -38,7 +38,7 @@ def shors_algorithm(a, n):
     else:
         return None  # failed to factor n
 
-# Example usage
+
 a = 2
 n = 364807
 factors = shors_algorithm(a, n)
