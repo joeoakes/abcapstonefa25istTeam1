@@ -14,15 +14,20 @@ Team Members: Alex Hammond, Ali Almalky, Madisyn Brandt, Giovanni DiBacco
 
 ### File Explanations
 **ClassicalShor'sAlgorithm.py**
-- Simple Shor's Algorithm program to work with classical computing to be used to verify the Qiskit code  
+- Simple Shor's Algorithm program to work with classical computing to be used to verify the Qiskit code
+
 **QiskitShor'sAlgorithm.py**
 - The main file for the Qiskit circuit that the team will work on
+
 **QiskitShor'sAlgorithmEXAMPLE.py**
 - A publically available hardcoded version of Shor's aglorithm with Qiskit to learn and expirement on
+
 **README.md**
 - Overview of the project along with important information
+
 **SimpleRSAGeneration.py**
 - Meant to act as a way to easily test both the classical shor's algorithm and the one our team will create with Qiskit
+
 **TestingLogs.txt**
 - Will store the values when testing classical and/ or our team's custom Qiskit circuit to compare and learn from
 
