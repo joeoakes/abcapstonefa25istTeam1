@@ -7,7 +7,7 @@
 # Revision: 
 
 import math
-from sympy import primerange, isprime
+from sympy import primerange
 import random
 
 def generate_rsa_keys(prime_limit=100):

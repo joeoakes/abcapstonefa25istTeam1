@@ -9,13 +9,11 @@
 # Install required packages for Qiskit and plotting.
 # This line is commented out to make loading faster — only use it if these
 # packages are not already installed.
-# !pip install qiskit qiskit-aer matplotlib pylatexenc
+#!pip install qiskit qiskit-aer matplotlib pylatexenc
 
-import matplotlib.pyplot as plt
 import numpy as np
 from qiskit_aer import Aer
 from qiskit import QuantumCircuit, transpile
-from qiskit.visualization import plot_histogram
 from math import gcd
 from fractions import Fraction
 
