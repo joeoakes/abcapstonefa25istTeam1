@@ -36,3 +36,5 @@ Team Members: Alex Hammond, Ali Almalky, Madisyn Brandt, Giovanni DiBacco
 - Will store the values when testing classical and/ or our team's custom Qiskit circuit to compare and learn from
 
 ## Setup Guide
+For setup ensure you run the following install to have the proper packages
+```!pip install qiskit qiskit-aer matplotlib pylatexenc sympy```
