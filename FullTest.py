@@ -6,3 +6,5 @@
 # Last Date Changed: 10/23/2025
 # Revision:
 
+from ClassicalShorAlgorithm import shors_algorithm
+#from SimpleRSAGeneration import
