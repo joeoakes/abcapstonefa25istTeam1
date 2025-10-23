@@ -43,7 +43,7 @@ def c_amod15(a, power):
             U.swap(0, 2)
         if a in [7, 11, 13]:
             for q in range(4):
-                U.x(q)  # Flip the qubit state (like switching 0 ↔ 1 (superpostion))
+                U.x(q)  # Flip the qubit state (like switching 0 ↔ 1 (superposition))
 
     # Convert the circuit to a reusable gate and make it controllable
     U = U.to_gate()
