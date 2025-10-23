@@ -5,7 +5,8 @@ Team Members: Alex Hammond, Ali Almalky, Madisyn Brandt, Giovanni DiBacco
   This GitHub repository will consist of the Team's effort to create a Qiskit circuit for decryption of a simple form of RSA. With in it will contain the files we used to compare and test the functionality of our circuit along with logging the test results when we begin testing.
 
 ## Repository Layout
-- ClassicalShor'sAlgorithm.py
+- ClassicalShorAlgorithm.py
+- FullTest.py
 - QiskitShor'sAlgorithm.py
 - QiskitShor'sAlgorithmEXAMPLE.py
 - README.md
@@ -13,8 +14,11 @@ Team Members: Alex Hammond, Ali Almalky, Madisyn Brandt, Giovanni DiBacco
 - TestingLogs.txt
 
 ### File Explanations
-**ClassicalShor'sAlgorithm.py**
+**ClassicalShorAlgorithm.py**
 - Simple Shor's Algorithm program to work with classical computing to be used to verify the Qiskit code
+
+**FullTest.py**
+- Acts as the main run file running the RSA generation code, classical shor's code, and qiskit algorithm code then logging outputs in TestingLogs.txt
 
 **QiskitShor'sAlgorithm.py**
 - The main file for the Qiskit circuit that the team will work on
