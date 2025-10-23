@@ -11,12 +11,12 @@ import math
 
 def shors_algorithm(a, n):
     """
-   factor n using a simplified version of Shor's algorithm.
+   factor n using a simplified version of Shor's algorithm
     Returns (p, q) of factors or nothing if error
     """
     def multiplicative_order(a, n):
         if math.gcd(a, n) != 1:
-            raise ValueError("a and n must be coprime")
+            raise ValueError("a and n need to be coprime")
         x = 1
         for r in range(1, n):
             x = (x * a) % n
@@ -27,7 +27,7 @@ def shors_algorithm(a, n):
     # Step 1: Find the order r
     r = multiplicative_order(a, n)
     if r % 2 != 0:
-        return None  # Cannot factor if r is odd
+        return None  # Cannot factor  r if odd
 
     # Step 2: Compute potential factors
     p = math.gcd(pow(a, r // 2, n) - 1, n)
@@ -36,7 +36,7 @@ def shors_algorithm(a, n):
     if p * q == n:
         return (p, q)
     else:
-        return None  # Failed to factor n
+        return None  # failed to factor n
 
 # Example usage
 a = 2
