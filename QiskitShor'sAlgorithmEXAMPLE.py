@@ -17,7 +17,7 @@ from qiskit import QuantumCircuit, transpile
 from math import gcd
 from fractions import Fraction
 import time
-# benchmarking input/starter code
+# Benchmarking input/starter code
 start_time = time.time()
 
 # Creates a quantum gate that multiplies by 'a' under modulus 15.
