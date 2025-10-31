@@ -8,6 +8,10 @@
 
 import math
 import random
+import time
+
+# Benchmarking input/starter code
+start_time = time.time()
 
 def shors_algorithm(n):
     """
@@ -40,3 +44,8 @@ def shors_algorithm(n):
         # Only accept nontrivial factors
         if 1 < p < n and 1 < q < n:
             return {"p": p, "q": q, "r": r, "a": a}
+
+        # benchmarking code which shows the total time it took the code to process
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Elapsed time: {elapsed_time:.4f} seconds")

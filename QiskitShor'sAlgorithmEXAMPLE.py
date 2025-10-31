@@ -4,7 +4,7 @@
 # Author: Madisyn Brandt
 # Date Developed: October 23, 2025
 # Last Date Changed: October 23, 2025
-# Revision: 1.0
+# Revision: 1.1
 
 # Install required packages for Qiskit and plotting.
 # This line is commented out to make loading faster — only use it if these
@@ -17,6 +17,7 @@ from qiskit import QuantumCircuit, transpile
 from math import gcd
 from fractions import Fraction
 import time
+
 # Benchmarking input/starter code
 start_time = time.time()
 
