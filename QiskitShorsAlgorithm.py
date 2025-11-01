@@ -42,9 +42,10 @@ def modularn(a, N, n_work):
     return gate
 
 def decrypt_message(cipher, n, d):
-    return ''.join([chr(pow(c, d, n)) for c in cipher])
+    decrypted_message = ''.join(chr(pow(c, d, n)) for c in cipher)
+    return decrypted_message
 
-def shors_qiskit(N, retries=5):
+def shors_qiskit(N, n_count, retries=5):
     if N % 2 == 0:
         return 2, None, None
 
@@ -70,7 +71,7 @@ def shors_qiskit(N, retries=5):
             return gcd(a, N), None, None
 
         # Quantum part
-        r = find_period_quantum(a, N, backend)
+        r = find_period_quantum(a, N, backend, n_count)
         if r is None or r % 2 != 0:
             continue
 
@@ -86,9 +87,9 @@ def shors_qiskit(N, retries=5):
             return factor1, factor2, r
     return None, None, None
 
-def find_period_quantum(a, N, backend):
+def find_period_quantum(a, N, backend, ncount=4):
     # Number of counting qubits
-    n_count = 4  # Will implement qubit input later -Alex
+    n_count = ncount # Will implement qubit input later -Alex
     n_target = int(np.ceil(np.log2(N)))
 
     qc = QuantumCircuit(n_count + n_target, n_count)
@@ -123,8 +124,8 @@ def find_period_quantum(a, N, backend):
 def is_prime(n):
     return all(n % i != 0 for i in range(2, int(n**0.5) + 1))
 
-def decrypt_attack(N, e, retries=5):
-  factored_p, factored_q, r = shors_qiskit(N, retries=retries)
+def decrypt_attack(N, e,n_count,retries=5):
+  factored_p, factored_q, r = shors_qiskit(N, n_count, retries=retries)
 
   if not factored_p:
       raise RuntimeError("Shor did not return factors; try running again (randomness) or use a different simulator seed.")
@@ -162,7 +163,7 @@ def phase_to_r(phase, N, max_den=None):
     num, den = show_fraction_from_phase(phase, max_denominator=max_den)
     return den
 
-def QiskitShor(c, n, e, retries=5):
+def QiskitShor(c, n, e, n_count=4, retries=5):
 
-  factored_p, factored_q, d_factored = decrypt_attack(n, e, retries=retries)
-  return factored_p, factored_q, decrypt_message(c, n, d_factored)
+    factored_p, factored_q, d_factored = decrypt_attack(n, e, n_count, retries)
+    return factored_p, factored_q, decrypt_message(c, n, d_factored)

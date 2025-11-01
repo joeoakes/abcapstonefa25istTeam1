@@ -18,8 +18,14 @@ log_filename = "TestingLogs.txt"
 # Generate RSA keys
 p, q, n, phi, e, d = generate_rsa_keys()
 
+
 # Take message from user
 message = input("Enter the message to encrypt: ")
+qubits = input("Enter amount of working Qubits (default 4): ")
+retries = input("Enter number of retries (default 5): ")
+
+qubits = int(qubits) if qubits.strip() else 4
+retries = int(retries) if retries.strip() else 5
 
 # Encrypt message
 encrypted_message = [pow(ord(ch), e, n) for ch in message]
@@ -42,7 +48,7 @@ print(f"Shor's possible factors: p = {shor_results['p']}, q = {shor_results['q']
 print(f"Original RSA factors: p = {p}, q = {q}")
 
 
-fp, fq, dm = QiskitShor(encrypted_message, n, e, 10)
+fp, fq, dm = QiskitShor(encrypted_message, n, e, qubits, retries)
 print("=== Qiskit Shor's Algorithm Results ===")
 print(f'n = {n}')
 print(f'p = {fp}')
