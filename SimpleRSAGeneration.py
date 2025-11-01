@@ -1,16 +1,16 @@
 # Project: abcapstonefa25istTeam1
 # Purpose Details: Simple RSA Encryption Generation
 # Course: Fall 2025 Abington Capstone Project Quantum Cryptosystem
-# Author: Ali Almalky
+# Author: Ali Almalky, Alex Hammond
 # Date Developed: 10/23/2025
 # Last Date Changed: 10/23/2025
-# Revision: 
+# Revision: Reduced prime_limit to 40
 
 import math
 from sympy import primerange
 import random
 
-def generate_rsa_keys(prime_limit=100):
+def generate_rsa_keys(prime_limit=40):
     primes = list(primerange(2, prime_limit+1))
     
     p = random.choice(primes)
