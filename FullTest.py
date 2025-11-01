@@ -58,5 +58,6 @@ with open(log_filename, "a") as log_file:
         f"{n}{DIVIDER}"
         f"({shor_results['p']},{shor_results['q']}){DIVIDER}"
         f"{shor_results['r']}{DIVIDER}"
-        f"{shor_results['a']}\n"
+        f"{shor_results['a']}{DIVIDER}"
+        f"({fp},{fq})\n"
     )
