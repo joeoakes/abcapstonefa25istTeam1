@@ -3,12 +3,11 @@
 # Course: Fall 2025 Abington Capstone Project Quantum Cryptosystem
 # Author: Madisyn Brandt, Alex Hammond, Ali Almalky
 # Date Developed: October 23, 2025
-# Last Date Changed: November 1, 2025
+# Last Date Changed: November 2, 2025
 # Revision: 1.2
 
 # Import Needed Modules from Python's module
 import numpy as np
-import random
 from math import gcd
 from qiskit import QuantumCircuit, transpile
 from qiskit.circuit.library import QFTGate
@@ -118,10 +117,10 @@ def find_period_quantum(a, N, backend, ncount=4):
         cu_gate = modularn(pow(a, power, N), N, n_target)
         qc.append(cu_gate, [j] + list(range(n_count, n_count + n_target)))
 
-    # Apply inverse Quantum Fourier Transform 
-    qc.append(QFTGate(n_count, inverse=True), range(n_count))
+    # Apply inverse Quantum Fourier Transform
+    qc.append(QFTGate(num_qubits=n_count).inverse(True), range(n_count))
 
-    # Step 5: Measure counting qubits 
+    # Step 5: Measure counting qubits
     qc.measure(range(n_count), range(n_count))
 
     # Step 6: Execute the circuit on simulator
@@ -129,7 +128,7 @@ def find_period_quantum(a, N, backend, ncount=4):
     job = backend.run(qc, shots=1024)
     counts = job.result().get_counts()
 
-    # Step 7: Analyze results 
+    # Step 7: Analyze results
     measured = max(counts, key=counts.get)  # Most frequent bitstring
     phase = int(measured, 2) / (2 ** n_count)
 
@@ -140,26 +139,8 @@ def find_period_quantum(a, N, backend, ncount=4):
     # Convert phase → r using continued fractions
     r = phase_to_r(phase, N)
 
-    print(f"[Quantum Subroutine] a={a}, phase={phase:.5f}, r={r}")
+    print(f"[Quantum Subroutine] phase={phase:.5f}, r={r}")
 
-    return r
-
-    # Giovanni put only the line for QFTGate inverse code under this comment and before the next with qc.append()
-
-
-    # Measure counting register
-    qc.measure(range(n_count), range(n_count))
-
-    qc = transpile(qc, backend)
-    job = backend.run(qc, shots=1024)
-    counts = job.result().get_counts()
-
-    measured = max(counts, key=counts.get)
-    phase = int(measured, 2) / (2 ** n_count)
-    if phase == 0:
-        return None
-
-    r = phase_to_r(phase, N)
     return r
 
 def is_prime(n):
@@ -179,20 +160,9 @@ def decrypt_attack(N, e,n_count,retries=5):
   d_factored = modinv(e, phi_factored)
   return factored_p, factored_q, d_factored
 
-def show_fraction_from_phase(phase: float, max_denominator=1<<20):
+def show_fraction_from_phase(phase: float, max_denominator:1<<20):
     # Convert the phase into a fraction
     frac = Fraction(phase).limit_denominator(max_denominator)
-
-    # Display the starter decimal value
-    # print(f"Phase (decimal): {phase}")
-
-    # Display the fraction’s numerator and denominator
-    # print(f"Fraction form: {frac.numerator}/{frac.denominator}")
-
-    # In Shor’s Algorithm, the denominator shows the potential period (r value)
-    # print(f"Possible period (denominator): {frac.denominator}\n")
-
-    # Return the fraction object
     return frac.numerator, frac.denominator
 
 def phase_to_r(phase, N, max_den=None):
