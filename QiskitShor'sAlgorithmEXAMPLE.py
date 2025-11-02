@@ -4,19 +4,22 @@
 # Author: Madisyn Brandt
 # Date Developed: October 23, 2025
 # Last Date Changed: October 23, 2025
-# Revision: 1.0
+# Revision: 1.1
 
 # Install required packages for Qiskit and plotting.
 # This line is commented out to make loading faster — only use it if these
 # packages are not already installed.
-#!pip install qiskit qiskit-aer matplotlib pylatexenc
+# !pip install qiskit qiskit-aer matplotlib pylatexenc
 
 import numpy as np
 from qiskit_aer import Aer
 from qiskit import QuantumCircuit, transpile
 from math import gcd
 from fractions import Fraction
+import time
 
+# Benchmarking input/starter code
+start_time = time.time()
 
 # Creates a quantum gate that multiplies by 'a' under modulus 15.
 # This is a key part of Shor's algorithm used to find factors.
@@ -135,3 +138,8 @@ while not FACTOR_FOUND:
             if guess not in [1, N] and (N % guess) == 0:
                 print(f"The algorithm found that {guess} divides {N} evenly!")
                 FACTOR_FOUND = True # Prints results if it is even
+
+            # benchmarking code which shows the total time it took the code to process
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            print(f"Elapsed time: {elapsed_time:.4f} seconds")

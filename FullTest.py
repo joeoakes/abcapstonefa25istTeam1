@@ -3,11 +3,14 @@
 # Course: Fall 2025 Abington Capstone Project Quantum Cryptosystem
 # Author: Alex Hammond
 # Date Developed: 10/23/2025
-# Last Date Changed: 10/23/2025
-# Revision: Implemented ability to test classical shor's with the simple RSA generation and log results
+# Last Date Changed: 11/1/2025
+# Revision: Implemented QiskitShorsAlgorithm.py to results
+
+#!pip install -U qiskit qiskit-aer-gpu-cu11 --quiet
 
 from ClassicalShorAlgorithm import shors_algorithm
 from SimpleRSAGeneration import generate_rsa_keys
+from QiskitShorsAlgorithm import QiskitShor
 
 DIVIDER = " | "
 log_filename = "TestingLogs.txt"
@@ -15,8 +18,14 @@ log_filename = "TestingLogs.txt"
 # Generate RSA keys
 p, q, n, phi, e, d = generate_rsa_keys()
 
+
 # Take message from user
 message = input("Enter the message to encrypt: ")
+qubits = input("Enter amount of working Qubits (default 4): ")
+retries = input("Enter number of retries (default 5): ")
+
+qubits = int(qubits) if qubits.strip() else 4
+retries = int(retries) if retries.strip() else 5
 
 # Encrypt message
 encrypted_message = [pow(ord(ch), e, n) for ch in message]
@@ -24,20 +33,27 @@ encrypted_message = [pow(ord(ch), e, n) for ch in message]
 # Run shor's algorithm with classical computing
 shor_results = shors_algorithm(n)
 
-# Qiskit function placed here when ready
-
 # Display results
+
 print("=== RSA Key Generation ===")
 print(f"p = {p}, q = {q}, n = {n}")
 print(f"e = {e}, d = {d}")
 print(f"Encrypted message: {encrypted_message}\n")
 
-print("=== Shor's Algorithm Results ===")
+print("=== Classical Shor's Algorithm Results ===")
 print(f"n = {shor_results['n'] if 'n' in shor_results else n}")
 print(f"a = {shor_results['a']}")
 print(f"r = {shor_results['r']}")
 print(f"Shor's possible factors: p = {shor_results['p']}, q = {shor_results['q']}")
 print(f"Original RSA factors: p = {p}, q = {q}")
+
+
+fp, fq, dm = QiskitShor(encrypted_message, n, e, qubits, retries)
+print("=== Qiskit Shor's Algorithm Results ===")
+print(f'n = {n}')
+print(f'p = {fp}')
+print(f'q = {fq}')
+print(f'decrypted message: {dm}')
 
 # Log results to TestingLogs.txt
 with open(log_filename, "a") as log_file:
@@ -48,5 +64,6 @@ with open(log_filename, "a") as log_file:
         f"{n}{DIVIDER}"
         f"({shor_results['p']},{shor_results['q']}){DIVIDER}"
         f"{shor_results['r']}{DIVIDER}"
-        f"{shor_results['a']}\n"
+        f"{shor_results['a']}{DIVIDER}"
+        f"({fp},{fq})\n"
     )
