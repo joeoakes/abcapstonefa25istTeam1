@@ -1,7 +1,7 @@
 # Project: abcapstonefa25istTeam1
 # Purpose Details: Demonstrate how fractional representation relates to quantum phases
 # Course: Fall 2025 Abington Capstone Project Quantum Cryptosystem
-# Author: Madisyn Brandt, Alex Hammond
+# Author: Madisyn Brandt, Alex Hammond, Ali Almalky
 # Date Developed: October 23, 2025
 # Last Date Changed: November 1, 2025
 # Revision: 1.2
@@ -88,20 +88,61 @@ def shors_qiskit(N, n_count, retries=5):
     return None, None, None
 
 def find_period_quantum(a, N, backend, ncount=4):
-    # Number of counting qubits
-    n_count = ncount # Will implement qubit input later -Alex
+    """
+    Quantum subroutine for Shor's Algorithm:
+    - Creates superposition in counting register
+    - Performs modular exponentiation in superposition
+    - Applies inverse QFT to estimate phase
+    - Measures to determine the period 'r'
+    """
+
+    # Number of counting qubits (for precision)
+    n_count = ncount
+
+    # Number of target qubits (to represent N)
     n_target = int(np.ceil(np.log2(N)))
 
+    # Build the quantum circuit
     qc = QuantumCircuit(n_count + n_target, n_count)
 
+    # Step 1: Superposition on counting qubits
     qc.h(range(n_count))
+
+    # Step 2: Initialize target register to |1⟩
     qc.x(n_count + n_target - 1)
 
+    # Step 3: Controlled modular exponentiation
+    # Each control qubit applies (a^(2^j) mod N)
     for j in range(n_count):
         power = 2 ** j
         cu_gate = modularn(pow(a, power, N), N, n_target)
         qc.append(cu_gate, [j] + list(range(n_count, n_count + n_target)))
 
+    # Apply inverse Quantum Fourier Transform 
+    qc.append(QFTGate(n_count, inverse=True), range(n_count))
+
+    # Step 5: Measure counting qubits 
+    qc.measure(range(n_count), range(n_count))
+
+    # Step 6: Execute the circuit on simulator
+    qc = transpile(qc, backend)
+    job = backend.run(qc, shots=1024)
+    counts = job.result().get_counts()
+
+    # Step 7: Analyze results 
+    measured = max(counts, key=counts.get)  # Most frequent bitstring
+    phase = int(measured, 2) / (2 ** n_count)
+
+    # If phase is 0, return None (invalid)
+    if phase == 0:
+        return None
+
+    # Convert phase → r using continued fractions
+    r = phase_to_r(phase, N)
+
+    print(f"[Quantum Subroutine] a={a}, phase={phase:.5f}, r={r}")
+
+    return r
 
     # Giovanni put only the line for QFTGate inverse code under this comment and before the next with qc.append()
 
@@ -138,7 +179,7 @@ def decrypt_attack(N, e,n_count,retries=5):
   d_factored = modinv(e, phi_factored)
   return factored_p, factored_q, d_factored
 
-def show_fraction_from_phase(phase: float, max_denominator:1<<20):
+def show_fraction_from_phase(phase: float, max_denominator=1<<20):
     # Convert the phase into a fraction
     frac = Fraction(phase).limit_denominator(max_denominator)
 
