@@ -44,7 +44,7 @@ def decrypt_message(cipher, n, d):
     decrypted_message = ''.join(chr(pow(c, d, n)) for c in cipher)
     return decrypted_message
 
-def shors_qiskit(N, n_count, retries=5):
+def shors_qiskit(N, n_count, retries):
     if N % 2 == 0:
         return 2, None, None
 
@@ -60,7 +60,7 @@ def shors_qiskit(N, n_count, retries=5):
                        device="GPU" if gpu_ok else "CPU",
                        cuStateVec_enable=True)
 
-    candidatebase = list(primerange(2, 200))
+    candidatebase = list(primerange(3, 200))
 
     for i, a in enumerate(candidatebase):
         if i >= retries:
@@ -82,11 +82,17 @@ def shors_qiskit(N, n_count, retries=5):
         factor1 = gcd(x + 1, N)
         factor2 = gcd(x - 1, N)
 
-        if factor1 * factor2 == N:
+        if factor1 != 1 and factor1 != N:
+            if factor2 == 1 or factor2 == N:
+                factor2 = N // factor1
+            return factor1, factor2, r
+        if factor2 != 1 and factor2 != N:
+            if factor1 == 1 or factor1 == N:
+                factor1 = N // factor2
             return factor1, factor2, r
     return None, None, None
 
-def find_period_quantum(a, N, backend, ncount=4):
+def find_period_quantum(a, N, backend, ncount):
     """
     Quantum subroutine for Shor's Algorithm:
     - Creates superposition in counting register
@@ -125,28 +131,24 @@ def find_period_quantum(a, N, backend, ncount=4):
 
     # Step 6: Execute the circuit on simulator
     qc = transpile(qc, backend)
-    job = backend.run(qc, shots=1024)
+    job = backend.run(qc, shots=2048)
     counts = job.result().get_counts()
 
     # Step 7: Analyze results
-    measured = max(counts, key=counts.get)  # Most frequent bitstring
-    phase = int(measured, 2) / (2 ** n_count)
+    for measured, count in sorted(counts.items(), key=lambda x: -x[1]):
+        phase = int(measured, 2) / (2 ** n_count)
+        if phase == 0:
+            continue  # try next most frequent bitstring
+        r = phase_to_r(phase, a, N)
+        if r is not None:
+            print(f"[Quantum Subroutine] phase={phase:.5f}, r={r}")
+            return r
 
-    # If phase is 0, return None (invalid)
-    if phase == 0:
-        return None
+    # If no valid r found
+    print("[Quantum Subroutine] No valid period found")
+    return None
 
-    # Convert phase → r using continued fractions
-    r = phase_to_r(phase, N)
-
-    print(f"[Quantum Subroutine] phase={phase:.5f}, r={r}")
-
-    return r
-
-def is_prime(n):
-    return all(n % i != 0 for i in range(2, int(n**0.5) + 1))
-
-def decrypt_attack(N, e,n_count,retries=5):
+def decrypt_attack(N, e,n_count,retries):
   factored_p, factored_q, r = shors_qiskit(N, n_count, retries=retries)
 
   if not factored_p:
@@ -158,23 +160,29 @@ def decrypt_attack(N, e,n_count,retries=5):
 
   phi_factored = (factored_p - 1) * (factored_q - 1)
   d_factored = modinv(e, phi_factored)
-  return factored_p, factored_q, d_factored
+  return factored_p, factored_q, d_factored, r
 
 def show_fraction_from_phase(phase: float, max_denominator:1<<20):
     # Convert the phase into a fraction
     frac = Fraction(phase).limit_denominator(max_denominator)
-    return frac.numerator, frac.denominator
+    return frac.denominator
 
-def phase_to_r(phase, N, max_den=None):
+def phase_to_r(phase, a, N, max_den=None):
     # phase is float in (0,1), returns candidate r or None
     if phase == 0:
         return None
     if max_den is None:
-        max_den = 1 << (int(np.ceil(np.log2(N))) + 1)
-    num, den = show_fraction_from_phase(phase, max_denominator=max_den)
-    return den
+        max_den = 2 * N
+    den = show_fraction_from_phase(phase, max_denominator=max_den)
+    k = 1
+    while den * k <= max_den:
+        r_candidate = den * k
+        if pow(a, r_candidate, N) == 1:
+            return r_candidate
+        k += 1
+    return None
 
-def QiskitShor(c, n, e, n_count=4, retries=5):
+def QiskitShor(c, n, e, n_count, retries):
 
-    factored_p, factored_q, d_factored = decrypt_attack(n, e, n_count, retries)
-    return factored_p, factored_q, decrypt_message(c, n, d_factored)
+    factored_p, factored_q, d_factored, r = decrypt_attack(n, e, n_count, retries)
+    return factored_p, factored_q, decrypt_message(c, n, d_factored), r

@@ -10,7 +10,7 @@ import math
 from sympy import primerange
 import random
 
-def generate_rsa_keys(prime_limit=50):
+def generate_rsa_keys(prime_limit=40):
     primes = list(primerange(11, prime_limit+1))
     
     p = random.choice(primes)
