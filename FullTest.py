@@ -3,8 +3,8 @@
 # Course: Fall 2025 Abington Capstone Project Quantum Cryptosystem
 # Author: Alex Hammond
 # Date Developed: 10/23/2025
-# Last Date Changed: 11/1/2025
-# Revision: Implemented QiskitShorsAlgorithm.py to results
+# Last Date Changed: 11/6/2025
+# Revision: Implemented proper r value
 
 #!pip install -U qiskit qiskit-aer-gpu-cu11 --quiet
 

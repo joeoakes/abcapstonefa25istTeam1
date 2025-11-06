@@ -3,8 +3,8 @@
 # Course: Fall 2025 Abington Capstone Project Quantum Cryptosystem
 # Author: Madisyn Brandt, Alex Hammond, Ali Almalky
 # Date Developed: October 23, 2025
-# Last Date Changed: November 2, 2025
-# Revision: 1.2
+# Last Date Changed: November 6, 2025
+# Revision: 1.3
 
 # Import Needed Modules from Python's module
 import numpy as np
