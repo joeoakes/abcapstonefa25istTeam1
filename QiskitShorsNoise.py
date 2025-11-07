@@ -193,6 +193,6 @@ def phase_to_r(phase, a, N, max_den=None):
     return None
 
 
-def QiskitShor(c, n, e, n_count, retries):
+def QiskitShorNoise(c, n, e, n_count, retries):
     factored_p, factored_q, d_factored, r = decrypt_attack(n, e, n_count, retries)
     return factored_p, factored_q, decrypt_message(c, n, d_factored), r

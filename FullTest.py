@@ -11,6 +11,7 @@
 from ClassicalShorAlgorithm import shors_algorithm
 from SimpleRSAGeneration import generate_rsa_keys
 from QiskitShorsAlgorithm import QiskitShor
+from QiskitShorsNoise import QiskitShorNoise
 
 DIVIDER = " | "
 log_filename = "TestingLogs.txt"
