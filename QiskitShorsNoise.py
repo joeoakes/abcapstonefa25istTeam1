@@ -1,10 +1,10 @@
 # Project: abcapstonefa25istTeam1
 # Purpose Details: Demonstrate how fractional representation relates to quantum phases
 # Course: Fall 2025 Abington Capstone Project Quantum Cryptosystem
-# Author: Giovanni D
+# Author: Giovanni D, Alex H
 # Date Developed: Nov 6, 2025
 # Last Date Changed: November 6, 2025
-# Revision:
+# Revision: 1.1
 
 import numpy as np
 from math import gcd

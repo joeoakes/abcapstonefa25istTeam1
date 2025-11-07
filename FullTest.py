@@ -4,7 +4,7 @@
 # Author: Alex Hammond
 # Date Developed: 10/23/2025
 # Last Date Changed: 11/6/2025
-# Revision: Implemented proper r value
+# Revision: Implemented QiskitShorNoise for later use
 
 #!pip install -U qiskit qiskit-aer-gpu-cu11 --quiet
 
