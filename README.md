@@ -10,6 +10,11 @@ Term: Fall 2025
 ## Team and Members
 Team Members: Alex Hammond, Ali Almalky, Madisyn Brandt, Giovanni DiBacco
 
+## Technologies Used
+Python 3
+
+Qiskit
+
 ## Project Overview
   This GitHub repository will consist of the Team's effort to create a Qiskit circuit for decryption of a simple form of RSA. With in it will contain the files we used to compare and test the functionality of our circuit along with logging the test results when we begin testing.
 
