@@ -1,4 +1,13 @@
 # RSA Quantum Decryption - abcapstonefa25istTeam1
+
+## Course Information
+Course: Fall 2025 Abington Capstone Project Quantum Cryptosystem
+
+Institution: Penn State Abington 
+
+Term: Fall 2025
+
+## Team and Members
 Team Members: Alex Hammond, Ali Almalky, Madisyn Brandt, Giovanni DiBacco
 
 ## Project Overview
