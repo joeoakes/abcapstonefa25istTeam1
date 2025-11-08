@@ -42,7 +42,7 @@ def setup_logger(name, log_dir="logs", level=logging.INFO):
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
 
-    # Avoid duplicate handlers if setup_logger is called more than once
+    # Avoid duplicate outputs if setup_logger is called more than once
     if not logger.handlers:
         logger.addHandler(file_handler)
         logger.addHandler(console_handler)
