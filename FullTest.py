@@ -146,7 +146,7 @@ logger.info(f'p = {fp}')
 logger.info(f'q = {fq}')
 logger.info(f'r = {r}')
 logger.info(f'decrypted message: {dm}')
-logger.info(f'{BOLD_CYAN} Qiskit Execution time: {elapsed} seconds')
+logger.info(f'{BOLD_CYAN}Qiskit Execution time: {elapsed} seconds')
 
 # Base logging directory
 base_log_dir = "LoggingResults"
