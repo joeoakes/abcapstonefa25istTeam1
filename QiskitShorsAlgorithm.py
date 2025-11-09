@@ -176,7 +176,7 @@ def find_period_quantum(a, N, backend, ncount):
         phase = int(measured, 2) / (2 ** n_count)
         if phase == 0:
             continue  # try next most frequent bitstring
-        r = phase_to_r(phase, a, N)
+        r = phase_to_r(phase, a, N, max_den=2*N)
         if r is not None:
             logger.info(f"{BOLD_GREEN}[Quantum Subroutine] phase={phase:.5f}, r={r}{RESET}")
             return r

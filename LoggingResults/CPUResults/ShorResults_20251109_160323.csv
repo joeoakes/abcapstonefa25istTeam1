@@ -1,2 +1,2 @@
 Device Used,Original Message,Encrypted Message,RSA Factors,N Value,Classical Shor Factors,Classical Shor r,Classical Shor a,Qiskit Shor Factors,Qiskit Shor r,Qiskit Shor Execution Time (Seconds)
-CPU,The men,"[282, 302, 200, 153, 241, 200, 297]","(29,11)",319,"(11,29)",140,95,"(11,29)",,2.435642
+CPU,them mans,"[58, 331, 424, 411, 230, 411, 130, 393, 463]","(17,29)",493,"(29,17)",56,19,"(17,29)",112,0.797144
