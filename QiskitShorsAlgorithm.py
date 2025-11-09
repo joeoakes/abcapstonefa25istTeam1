@@ -3,8 +3,8 @@
 # Course: Fall 2025 Abington Capstone Project Quantum Cryptosystem
 # Author: Madisyn Brandt, Alex Hammond, Ali Almalky
 # Date Developed: October 23, 2025
-# Last Date Changed: November 6, 2025
-# Revision: 1.3
+# Last Date Changed: November 9, 2025
+# Revision: 1.4
 
 # Import Needed Modules from Python's module
 import numpy as np
@@ -15,6 +15,41 @@ from qiskit_aer import AerSimulator
 from fractions import Fraction
 from qiskit.circuit.library import UnitaryGate
 from sympy import primerange
+import logging
+import colorlog
+
+# Logging colors
+log_colors = {
+    'DEBUG': 'cyan',
+    'INFO': 'light_white',      # was red, changed to green
+    'WARNING': 'yellow',
+    'ERROR': 'red',
+    'CRITICAL': 'light_red'
+}
+
+# Custom colors
+BOLD_WHITE = '\033[97;1m'
+BOLD_GREEN = '\033[92;1m'
+BOLD_YELLOW = '\033[93;1m'
+BOLD_CYAN = '\033[96;1m'
+RESET = '\033[0m'
+
+# Logging setup
+formatter = colorlog.ColoredFormatter(
+    "%(log_color)s%(asctime)s [%(levelname)s] - %(message)s%(reset)s",
+    datefmt="%H:%M:%S",
+    log_colors=log_colors
+)
+
+handler = colorlog.StreamHandler()
+handler.setFormatter(formatter)
+
+logger = colorlog.getLogger()
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
+
+logging.getLogger('qiskit').setLevel(logging.WARNING)
+logging.getLogger('qiskit_aer').setLevel(logging.WARNING)
 
 # Compute d using the modular inverse a⋅x≡1 mod m
 def modinv(a, m):
@@ -37,7 +72,7 @@ def modularn(a, N, n_work):
     CU[D:, D:] = root
 
     gate = UnitaryGate(CU)
-    print(f"a={a}, N={N}")
+    logger.info(f"a={a}, N={N}")
     return gate
 
 def decrypt_message(cipher, n, d):
@@ -46,15 +81,17 @@ def decrypt_message(cipher, n, d):
 
 def shors_qiskit(N, n_count, retries):
     if N % 2 == 0:
-        return 2, None, None
+        return 2, None, None, "CPU"
 
     # Try GPU; fall back to CPU if not available
     sim_check = AerSimulator() # Create an instance to check available devices
     gpu_ok = 'GPU' in sim_check.available_devices()
     if gpu_ok:
-        print("GPU available; using GPU simulator")
+        logger.warning("GPU available; using GPU simulator")
+        device_used = "GPU"
     else:
-        print("GPU not available; using CPU simulator")
+        logger.warning("GPU not available; using CPU simulator")
+        device_used = "CPU"
 
     backend = AerSimulator(method="statevector",
                        device="GPU" if gpu_ok else "CPU",
@@ -65,9 +102,9 @@ def shors_qiskit(N, n_count, retries):
     for i, a in enumerate(candidatebase):
         if i >= retries:
             break
-        print(f"a: {a}")
+        logger.info(f"a: {a}")
         if gcd(a, N) != 1:
-            return gcd(a, N), None, None
+            return gcd(a, N), None, None, device_used
 
         # Quantum part
         r = find_period_quantum(a, N, backend, n_count)
@@ -85,12 +122,12 @@ def shors_qiskit(N, n_count, retries):
         if factor1 != 1 and factor1 != N:
             if factor2 == 1 or factor2 == N:
                 factor2 = N // factor1
-            return factor1, factor2, r
+            return factor1, factor2, r, device_used
         if factor2 != 1 and factor2 != N:
             if factor1 == 1 or factor1 == N:
                 factor1 = N // factor2
-            return factor1, factor2, r
-    return None, None, None
+            return factor1, factor2, r, device_used
+    return None, None, None, device_used
 
 def find_period_quantum(a, N, backend, ncount):
     """
@@ -141,15 +178,15 @@ def find_period_quantum(a, N, backend, ncount):
             continue  # try next most frequent bitstring
         r = phase_to_r(phase, a, N)
         if r is not None:
-            print(f"[Quantum Subroutine] phase={phase:.5f}, r={r}")
+            logger.info(f"{BOLD_GREEN}[Quantum Subroutine] phase={phase:.5f}, r={r}{RESET}")
             return r
 
     # If no valid r found
-    print("[Quantum Subroutine] No valid period found")
+    logger.error("[Quantum Subroutine] No valid period found")
     return None
 
 def decrypt_attack(N, e,n_count,retries):
-  factored_p, factored_q, r = shors_qiskit(N, n_count, retries=retries)
+  factored_p, factored_q, r, device_used = shors_qiskit(N, n_count, retries=retries)
 
   if not factored_p:
       raise RuntimeError("Shor did not return factors; try running again (randomness) or use a different simulator seed.")
@@ -160,7 +197,7 @@ def decrypt_attack(N, e,n_count,retries):
 
   phi_factored = (factored_p - 1) * (factored_q - 1)
   d_factored = modinv(e, phi_factored)
-  return factored_p, factored_q, d_factored, r
+  return factored_p, factored_q, d_factored, r, device_used
 
 def show_fraction_from_phase(phase: float, max_denominator:1<<20):
     # Convert the phase into a fraction
@@ -184,5 +221,5 @@ def phase_to_r(phase, a, N, max_den=None):
 
 def QiskitShor(c, n, e, n_count, retries):
 
-    factored_p, factored_q, d_factored, r = decrypt_attack(n, e, n_count, retries)
-    return factored_p, factored_q, decrypt_message(c, n, d_factored), r
+    factored_p, factored_q, d_factored, r, device_used = decrypt_attack(n, e, n_count, retries)
+    return factored_p, factored_q, decrypt_message(c, n, d_factored), r, device_used

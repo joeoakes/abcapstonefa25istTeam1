@@ -4,14 +4,10 @@
 # Author: Giovanni, Alex
 # Date Developed: 10/23/2025
 # Last Date Changed: 10/23/2025
-# Revision: Commented out benchmarking code temporarily to fix infinite loop bug
+# Revision: 1.4
 
 import math
 import random
-import time
-
-# Benchmarking input/starter code
-# start_time = time.time()
 
 def shors_algorithm(n):
     """
@@ -44,9 +40,3 @@ def shors_algorithm(n):
         # Only accept nontrivial factors
         if 1 < p < n and 1 < q < n:
             return {"p": p, "q": q, "r": r, "a": a}
-
-        # benchmarking code which shows the total time it took the code to process
-        # Code was causing occasional infinite loop, commented out for now
-        # end_time = time.time()
-        # elapsed_time = end_time - start_time
-        # print(f"Elapsed time: {elapsed_time:.4f} seconds")
