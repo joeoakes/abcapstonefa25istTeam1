@@ -11,7 +11,6 @@
 from ClassicalShorAlgorithm import shors_algorithm
 from SimpleRSAGeneration import generate_rsa_keys
 from QiskitShorsAlgorithm import QiskitShor
-from QiskitShorsNoise import QiskitShorNoise
 import logging
 import colorlog
 import time
