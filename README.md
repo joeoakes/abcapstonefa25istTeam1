@@ -59,7 +59,7 @@ Linux OS
 Prerequisites: Important to note is that for this to be fully functional, you'll want to run this in a Linux environment as it uses GPU CU11 simulation import, which is only available on Linux. You also need to have a GPU that can support CUDA cores, and you need to have Python.
 
 For setup ensure you run the following install to have the proper packages
-```!pip install qiskit qiskit-aer matplotlib pylatexenc sympy```
+```pip install qiskit qiskit-aer matplotlib pylatexenc sympy```
 
 Clone the Github repository 
 - To do this, run the following command:
