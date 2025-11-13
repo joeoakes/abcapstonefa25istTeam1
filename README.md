@@ -18,7 +18,10 @@ Qiskit
 ## Project Overview
   This GitHub repository will consist of the Team's effort to create a Qiskit circuit for decryption of a simple form of RSA. With in it will contain the files we used to compare and test the functionality of our circuit along with logging the test results when we begin testing.
 
-## Repository Layout
+## Project Objectives
+  The objective of this project is to utilize Qiskit and Shor's Algorithm in order to decrypt a simplified form of RSA, within this project we will also run various tests to verify that our code is working correctly. 
+
+## Project Structure
 - ClassicalShorAlgorithm.py
 - FullTest.py
 - QiskitShor'sAlgorithm.py
@@ -32,7 +35,7 @@ Qiskit
 - Simple Shor's Algorithm program to work with classical computing to be used to verify the Qiskit code
 
 **FullTest.py**
-- Acts as the main run file running the RSA generation code, classical shor's code, and qiskit algorithm code then logging outputs in TestingLogs.txt
+- Acts as the main run file running the RSA generation code, classical shor's code, and Qiskit algorithm code then logging outputs in TestingLogs.txt
 
 **QiskitShor'sAlgorithm.py**
 - The main file for the Qiskit circuit that the team will work on
