@@ -63,6 +63,7 @@ For setup ensure you run the following install to have the proper packages
 
 Clone the Github repository 
 - To do this, run the following command:
+
 cd ~/projects
 
 git clone https://github.com/<your-username>/abcapstonefa25istTeam1.git
@@ -71,6 +72,7 @@ cd abcapstonefa25istTeam1
 
 Create and Activate a Virtual Environment
 - To do this, run the following command:
+
 python3 -m venv .venv
 
 source .venv/bin/activate
