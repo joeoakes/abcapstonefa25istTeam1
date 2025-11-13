@@ -15,6 +15,8 @@ Python 3
 
 Qiskit
 
+Linux OS
+
 ## Project Overview
   This GitHub repository will consist of the Team's effort to create a Qiskit circuit for decryption of a simple form of RSA. With in it will contain the files we used to compare and test the functionality of our circuit along with logging the test results when we begin testing.
 
@@ -22,26 +24,30 @@ Qiskit
   The objective of this project is to utilize Qiskit and Shor's Algorithm in order to decrypt a simplified form of RSA, within this project we will also run various tests to verify that our code is working correctly. 
 
 ## Project Structure
+- LegacyFiles Folder
+- LoggingResults/CPUResults
 - ClassicalShorAlgorithm.py
 - FullTest.py
-- QiskitShor'sAlgorithm.py
-- QiskitShor'sAlgorithmEXAMPLE.py
+- QiskitShorsAlgorithm.py
 - README.md
 - SimpleRSAGeneration.py
-- TestingLogs.txt
 
 ### File Explanations
+
+**LegacyFiles Folder**
+- A folder with QiskitShorsNoise.py, which is no longer functional
+
+**LoggingResults/CPUResults Folder**
+- A folder containing our the results of our test logging
+
 **ClassicalShorAlgorithm.py**
 - Simple Shor's Algorithm program to work with classical computing to be used to verify the Qiskit code
 
 **FullTest.py**
 - Acts as the main run file running the RSA generation code, classical shor's code, and Qiskit algorithm code then logging outputs in TestingLogs.txt
 
-**QiskitShor'sAlgorithm.py**
+**QiskitShorsAlgorithm.py**
 - The main file for the Qiskit circuit that the team will work on
-
-**QiskitShor'sAlgorithmEXAMPLE.py**
-- A publically available hardcoded version of Shor's aglorithm with Qiskit to learn and expirement on
 
 **README.md**
 - Overview of the project along with important information
@@ -49,9 +55,31 @@ Qiskit
 **SimpleRSAGeneration.py**
 - Meant to act as a way to easily test both the classical shor's algorithm and the one our team will create with Qiskit
 
-**TestingLogs.txt**
-- Will store the values when testing classical and/ or our team's custom Qiskit circuit to compare and learn from
-
 ## Setup Guide
+Prerequisites: Important to note is that for this to be fully functional, you'll want to run this in a Linux environment as it uses GPU CU11 simulation import, which is only available on Linux. You also need to have a GPU that can support CUDA cores, and you need to have Python.
+
 For setup ensure you run the following install to have the proper packages
 ```!pip install qiskit qiskit-aer matplotlib pylatexenc sympy```
+
+Clone the Github repository 
+- To do this, run the following command:
+cd ~/projects
+git clone https://github.com/<your-username>/abcapstonefa25istTeam1.git
+cd abcapstonefa25istTeam1
+
+Create and Activate a Virtual Environment
+- To do this, run the following command:
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip setuptools wheel
+
+Run the Project:
+- To do this, run the following command:
+python FullTest.py
+
+## Results and Screen Captures
+
+## License Details
+
+
+
