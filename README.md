@@ -66,7 +66,7 @@ Clone the Github repository
 
 cd ~/projects
 
-git clone 
+git clone https://github.com/joeoakes/abcapstonefa25istTeam1
 
 cd abcapstonefa25istTeam1
 
