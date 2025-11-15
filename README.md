@@ -15,7 +15,9 @@ Python 3
 
 Qiskit
 
-Linux OS
+WSL 
+
+Google Colabs
 
 ## Project Overview
   This GitHub repository will consist of the Team's effort to create a Qiskit circuit for decryption of a simple form of RSA. With in it will contain the files we used to compare and test the functionality of our circuit along with logging the test results when we begin testing.
