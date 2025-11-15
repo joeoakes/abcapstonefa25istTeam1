@@ -58,8 +58,14 @@ Linux OS
 ## Setup Guide
 Prerequisites: Important to note is that for this to be fully functional, you'll want to run this in a Linux environment as it uses GPU CU11 simulation import, which is only available on Linux. You also need to have a GPU that can support CUDA cores, and you need to have Python.
 
-For setup ensure you run the following install to have the proper packages
-```pip install qiskit qiskit-aer colorlog sympy```
+Create and Activate a Virtual Environment
+- To do this, run the following command:
+
+python3 -m venv .venv
+
+source .venv/bin/activate
+
+pip install --upgrade pip setuptools wheel
 
 Clone the Github repository 
 - To do this, run the following command:
@@ -70,22 +76,12 @@ git clone https://github.com/joeoakes/abcapstonefa25istTeam1
 
 cd abcapstonefa25istTeam1
 
-Create and Activate a Virtual Environment
-- To do this, run the following command:
-
-python3 -m venv .venv
-
-source .venv/bin/activate
-
-pip install --upgrade pip setuptools wheel
+Run the following command to install the required packages:
+```pip install qiskit qiskit-aer colorlog sympy```
 
 Run the Project:
 - To do this, run the following command:
 python FullTest.py
 
 ## Results and Screen Captures
-
-## License Details
-
-
 
