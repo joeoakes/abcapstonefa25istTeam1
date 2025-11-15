@@ -27,6 +27,9 @@ Google Colabs
 
 ## Project Structure
 - LegacyFiles Folder
+  - QiskitShor'sAlgorithmEXAMPLE.py
+  - QiskitShorsNoise.py
+  - TestingLogs(OLD).txt
 - LoggingResults/CPUResults
 - ClassicalShorAlgorithm.py
 - FullTest.py
@@ -79,7 +82,7 @@ git clone https://github.com/joeoakes/abcapstonefa25istTeam1
 cd abcapstonefa25istTeam1
 
 Run the following command to install the required packages:
-```pip install qiskit qiskit-aer colorlog sympy```
+```python3 -m pip install qiskit qiskit-aer colorlog sympy```
 
 Run the Project:
 - To do this, run the following command:
