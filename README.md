@@ -82,6 +82,7 @@ git clone https://github.com/joeoakes/abcapstonefa25istTeam1
 cd abcapstonefa25istTeam1
 
 Run the following command to install the required packages:
+
 ```python3 -m pip install qiskit qiskit-aer colorlog sympy```
 
 Run the Project:
