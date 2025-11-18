@@ -148,7 +148,7 @@ logger.info(f'decrypted message: {dm}')
 logger.info(f'{BOLD_CYAN}Qiskit Execution time: {elapsed} seconds')
 
 # Base logging directory
-base_log_dir = "LoggingResults"
+base_log_dir = "abcapstonefa25istTeam1/LoggingResults"
 
 # Select subfolder based on device used
 if device_used.upper() == "GPU":
@@ -199,4 +199,4 @@ with open(csv_filename, "a", newline="") as f:
         f"{elapsed:.6f}"
     ])
 
-print(f"{BOLD_YELLOW}Results logged to {csv_filename}")
+print(f"{BOLD_YELLOW}Results logged to {csv_filename}{RESET}")
