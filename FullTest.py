@@ -148,7 +148,7 @@ logger.info(f'decrypted message: {dm}')
 logger.info(f'{BOLD_CYAN}Qiskit Execution time: {elapsed} seconds')
 
 # Base logging directory
-base_log_dir = "abcapstonefa25istTeam1/LoggingResults"
+base_log_dir = "~/LoggingResults"
 
 # Select subfolder based on device used
 if device_used.upper() == "GPU":
