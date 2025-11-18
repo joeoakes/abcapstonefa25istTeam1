@@ -147,8 +147,11 @@ logger.info(f'r = {r}')
 logger.info(f'decrypted message: {dm}')
 logger.info(f'{BOLD_CYAN}Qiskit Execution time: {elapsed} seconds')
 
-# Base logging directory
-base_log_dir = "~/LoggingResults"
+# Get the absolute directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Base logging directory inside the project
+base_log_dir = os.path.join(script_dir, "LoggingResults")
 
 # Select subfolder based on device used
 if device_used.upper() == "GPU":
