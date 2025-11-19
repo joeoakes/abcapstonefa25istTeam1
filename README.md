@@ -94,6 +94,10 @@ Run the following command to install the required packages:
 
 ```python3 -m pip install qiskit qiskit-aer colorlog sympy```
 
+On Linux only. run this command separately: 
+
+pip install qiskit-aer-gpu-cu11
+
 Run the Project:
 - To do this, run the following command:
 python FullTest.py
