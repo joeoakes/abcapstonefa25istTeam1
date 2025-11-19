@@ -11,8 +11,11 @@ Term: Fall 2025
 Team Members:
 
 Alex – Team Lead: Logger, GPU testing, coordination
+
 Madisyn – Documentation Lead: Unit testing, RSA/Shor validation, logging verification
+
 Ali – Encryption & Architecture Lead: AES/architecture, Linux scripts, key handling
+
 Giovanni – Performance & Stress Tester: Load testing, benchmarks, timing & scaling
 
 
