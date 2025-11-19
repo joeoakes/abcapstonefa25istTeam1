@@ -20,7 +20,7 @@ Giovanni – Performance & Stress Tester: Load testing, benchmarks, timing & sca
 
 
 ## Technologies Used
-Python 3
+Python 3.14
 
 Qiskit
 
@@ -39,7 +39,9 @@ Google Colabs
   - QiskitShor'sAlgorithmEXAMPLE.py
   - QiskitShorsNoise.py
   - TestingLogs(OLD).txt
-- LoggingResults/CPUResults
+- LoggingResults
+  - CPUResults
+  - GPUResults
 - ClassicalShorAlgorithm.py
 - FullTest.py
 - QiskitShorsAlgorithm.py
@@ -51,8 +53,8 @@ Google Colabs
 **LegacyFiles Folder**
 - A folder with QiskitShorsNoise.py, which is no longer functional
 
-**LoggingResults/CPUResults Folder**
-- A folder containing our the results of our test logging
+**LoggingResults Folder**
+- A folder containing our the results of our test logging. This contains both GPUResults and CPUResults, along with a few csv files from GPU testing on the QuantumX machine.
 
 **ClassicalShorAlgorithm.py**
 - Simple Shor's Algorithm program to work with classical computing to be used to verify the Qiskit code
