@@ -98,7 +98,7 @@ Run the following command to install the required packages:
 
 On Linux only. run this command separately: 
 
-```pip install qiskit-aer-gpu-cu11```
+```python3 -m pip install qiskit-aer-gpu-cu11```
 
 Run the Project:
 - To do this, run the following command:
